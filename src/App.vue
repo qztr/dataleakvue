@@ -7,7 +7,7 @@
         </p>
       </div>
       <div
-        class="content  flex flex-col w-auto justify-center align-middle  
+        class="relative content  flex flex-col w-full justify-center align-middle  
         text-xl h-auto "
       >
         <p>
@@ -15,7 +15,7 @@
           <span class="font-bold italic">free</span> and get nothing back! We
           already know Your:
         </p>
-        <div class="">
+        <div class="relative w-full">
           <br />
           <span class="font-bold text-2xl">IP:</span> {{ userIP }}
           <br />
@@ -62,8 +62,9 @@
 
       <!-- Question input/forms start  -->
       <div class="relative footer flex w-full justify-center align-middle ">
+        <!-- first -->
         <div v-if="one" class="">
-          <div class="relative h-auto bg-green-700 rounded-sm w-96 py-1 mt-6">
+          <div class="relative h-auto bg-green-700 rounded-sm w-92 py-1 mt-6">
             <i
               v-if="loading"
               class="absolute left-1/3 top-1/3
@@ -105,8 +106,8 @@
               </div>
 
               <button
-                class="w-1/2 h-full py-2  px-0 m-2 bg-red-600 self-center shadow-lg rounded-md"
-                v-on:click="nextBlock('one')"
+                class="w-3/4 h-full py-2  px-1 m-2 bg-red-600 self-center shadow-lg rounded-md"
+                v-on:click="nextBlock"
                 :disabled="!one"
               >
                 Continue leaking
@@ -114,13 +115,18 @@
             </div>
           </div>
         </div>
-        <div v-if="two" class="">
-          <div class="h-12 w-12 bg-yellow-600">
-            <button class="w-full h-full" v-on:click="nextBlock('two')">
-              two
-            </button>
-          </div>
-        </div>
+        <!-- first END -->
+
+        <!-- second -->
+        <LeakForm
+          v-if="showNext"
+          :socials="socials"
+          :formsFilled="formsFilled"
+          @formWasFilled="formWasFilled"
+        ></LeakForm>
+        <!-- second END -->
+
+        <!-- third  -->
         <div v-if="three" class="">
           <div class="h-12 w-12 bg-red-600">
             <button class="w-full h-full" v-on:click="nextBlock('three')">
@@ -128,6 +134,7 @@
             </button>
           </div>
         </div>
+        <!-- third END -->
       </div>
       <!-- Question input/forms END  -->
     </div>
@@ -138,12 +145,14 @@
 import Tooltip from "./components/Tooltip.vue";
 import axios from "axios";
 import DatePicker from "./components/DatePicker.vue";
+import LeakForm from "./components/LeakForm.vue";
 
 export default {
   name: "App",
   components: {
     Tooltip,
     DatePicker,
+    LeakForm,
   },
   data() {
     return {
@@ -154,12 +163,14 @@ export default {
       userLong: null,
       userState: null,
       one: true,
-      two: false,
-      three: false,
+
       userName: "",
       userPhone: "",
       userBitrh: "",
       loading: false,
+      socials: ["fb", "inst"],
+      formsFilled: 0,
+      showNext: false,
     };
   },
   mounted() {
@@ -173,17 +184,20 @@ export default {
     });
   },
   methods: {
-    nextBlock(currentBlock) {
-      if (currentBlock == "one") {
-        this.loading = true;
-        setTimeout(() => (this.one = false), 4000);
-        this.two = true;
-      } else if (currentBlock == "two") {
-        this.two = false;
-        this.three = true;
-      } else if (currentBlock == "three") {
-        this.three = false;
-      }
+    nextBlock() {
+      this.loading = true;
+      setTimeout(
+        () => (
+          (this.one = false),
+          (this.two = true),
+          (this.loading = false),
+          (this.showNext = true)
+        ),
+        4000
+      );
+    },
+    formWasFilled() {
+      this.formsFilled++;
     },
   },
 };
