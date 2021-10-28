@@ -24,3 +24,7 @@ html {
     color: #fd4530;
     font-family: 'Fugaz One', cursive;
 }
+
+.doNotChangeOpacity{
+    opacity: 1 !important;
+}

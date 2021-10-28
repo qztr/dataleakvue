@@ -65,6 +65,7 @@ module.exports = {
       96: '24rem',
     },
     animation: {
+      'spin-slow' : 'spin 2s linear infinite',
       none: 'none',
       spin: 'spin 1s linear infinite',
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
