@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="mian grid col-span-full relative mx-4 mt-28 mb-24 ">
+    <div
+      class="mian grid col-span-full relative mx-4 mt-28 mb-24 justify-center align-middle "
+    >
       <div class="header  flex flex-col w-auto ">
         <p class=" text-redy text-5xl font-bold uppercase mb-12">
           LEAK your data for free!
@@ -13,7 +15,7 @@
         <p>
           You can share Your data absolutely for
           <span class="font-bold italic">free</span> and get nothing back! We
-          already know Your:
+          already know Your -
         </p>
         <div class="relative w-full">
           <br />
@@ -56,7 +58,6 @@
           services. Thank You for sharing!
           <br />
           <br />
-          Would You like to provide us more infromation?
         </p>
       </div>
 
@@ -74,6 +75,9 @@
               class="m-12 flex flex-col"
               :class="{ 'opacity-30': loading === true }"
             >
+              <p class="pt-0 text-xl">
+                Would You like to provide us more infromation?
+              </p>
               <div class="pt-8  ">
                 What is your name?
                 <input
@@ -127,25 +131,46 @@
         <!-- second END -->
 
         <!-- third  -->
-        <div v-if="three" class="">
-          <div class="h-12 w-12 bg-red-600">
-            <button class="w-full h-full" v-on:click="nextBlock('three')">
-              three
-            </button>
+        <div v-if="formsFilled === socials.length" class="mt-6 ">
+          <div class="h-auto w-auto bg-blue-600 ">
+            <div class="p-8 text-center flex flex-col">
+              Thank you! Now we will verify your leaks and sell them to a third
+              parties. Also we will set a spam flow on your accounts.
+              <br />
+              <br />
+              Have a good day!
+              <button
+                class="mt-5 text-sm text-yellow-200 hover:text-yellow-500"
+                @click="modalAboutOn = !modalAboutOn"
+              >
+                What does it mean? What is this website about?
+              </button>
+            </div>
           </div>
         </div>
         <!-- third END -->
       </div>
       <!-- Question input/forms END  -->
     </div>
+    <div class="h-12 w-ful flex justify-center align-middle">
+      <div class="self-center">
+        <button @click="modalAboutOn = !modalAboutOn">
+          About
+        </button>
+      </div>
+      <Geo></Geo>
+      <ModalAbout v-if="modalAboutOn" @close="closeModal()">123</ModalAbout>
+    </div>
   </div>
 </template>
 
 <script>
 import Tooltip from "./components/Tooltip.vue";
-import axios from "axios";
+// import axios from "axios";
 import DatePicker from "./components/DatePicker.vue";
 import LeakForm from "./components/LeakForm.vue";
+import ModalAbout from "./components/ModalAbout.vue";
+import Geo from "./components/Geo.vue";
 
 export default {
   name: "App",
@@ -153,6 +178,8 @@ export default {
     Tooltip,
     DatePicker,
     LeakForm,
+    ModalAbout,
+    Geo,
   },
   data() {
     return {
@@ -168,20 +195,21 @@ export default {
       userPhone: "",
       userBitrh: "",
       loading: false,
-      socials: ["fb", "inst"],
+      socials: ["Facebook", "Instagram", "E-mail"],
       formsFilled: 0,
       showNext: false,
+      modalAboutOn: false,
     };
   },
   mounted() {
-    axios.get("https://geolocation-db.com/json/").then((response) => {
-      console.log(response.data);
-      this.userIP = response.data.IPv4;
-      this.userCity = response.data.city;
-      this.userLat = response.data.latitude;
-      this.userLong = response.data.longitude;
-      this.userState = response.data.state;
-    });
+    // axios.get("https://geolocation-db.com/json/").then((response) => {
+    //   console.log(response.data);
+    //   this.userIP = response.data.IPv4;
+    //   this.userCity = response.data.city;
+    //   this.userLat = response.data.latitude;
+    //   this.userLong = response.data.longitude;
+    //   this.userState = response.data.state;
+    // });
   },
   methods: {
     nextBlock() {
@@ -198,6 +226,10 @@ export default {
     },
     formWasFilled() {
       this.formsFilled++;
+    },
+    closeModal() {
+      this.modalAboutOn = false;
+      console.log("close this shit");
     },
   },
 };

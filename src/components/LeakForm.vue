@@ -15,28 +15,29 @@
         class="m-12 flex flex-col"
         :class="{ 'opacity-30': loading === true }"
       >
-        <div class="text-xl">
-          Great! Next we provide you a chance to leak your {{ social }} box!
+        <div class="text-xl text-center">
+          Great! Next we provide you a chance to leak your <br />
+          <span class="text-2xl"> {{ social }}</span> credentials!
         </div>
         <div class="pt-8  ">
-          What is your e-mail adress?
+          What is your {{ social }} username?
           <input
             class="text-black rounded-md border-8 border-white
                   border-opacity-100 shadow-lg w-full"
             type="tel"
-            placeholder="your@mail.com"
+            placeholder="username"
             v-model="userName"
             :disabled="loading"
           />
         </div>
         <div class="pt-8 pb-6 ">
-          What is your password of your e-mail adress?
+          What is your password of your {{ social }}?
           <input
             class="text-black rounded-md border-8 border-white
                   border-opacity-100 shadow-lg w-full"
             type="tel"
             placeholder="password"
-            v-model="userName"
+            v-model="userPassword"
             :disabled="loading"
           />
         </div>
@@ -58,6 +59,8 @@ export default {
   data() {
     return {
       loading: false,
+      userName: "",
+      userPassword: "",
     };
   },
   props: ["socials", "formsFilled"],
@@ -68,6 +71,8 @@ export default {
         () => (this.$emit("formWasFilled"), (this.loading = false)),
         4000
       );
+      this.userName = "";
+      this.userPassword = "";
     },
   },
 };
