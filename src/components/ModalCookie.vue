@@ -8,27 +8,15 @@
         aria-describedby="modalDescription"
       >
         <section class="modal-body" id="modalDescription">
-          <slot name="body">
-            This website is a satire on todays data leak reality (l) and cookie
-            policy (ll)
+          <slot name="body text-center">
+            This site will collect literally everything that can be collected
+            about you.
             <br />
-            <br />
-            l. Website is inspired by uncountable amount of phishing sites that
-            are providing people an opportunity to leak their data as easy as
-            fill the online form
-            <br />
-            <br />
-            ll.Nowadays websites are using as a common practice displaying large
-            banners that are pushing you to accept Cookies otherwise you will
-            not be able to use website or read an article
-            <br />
-            <br />
-            None of data been stored or collected on this website, please keep
-            You and Your data save!
+            Data will be stored forever and sold to third party
           </slot>
         </section>
 
-        <footer class="modal-footer">
+        <footer class="modal-footer mb-12">
           <slot name="footer"> </slot>
           <button
             type="button"
@@ -36,7 +24,9 @@
             @click="close"
             aria-label="Close modal"
           >
-            Close
+            <span class="font-bold">
+              Accept cookie
+            </span>
           </button>
         </footer>
       </div>
@@ -46,7 +36,7 @@
 
 <script>
 export default {
-  name: "ModalAbout",
+  name: "ModalCookie",
   methods: {
     close() {
       this.$emit("close");

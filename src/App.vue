@@ -18,15 +18,10 @@
           already know Your -
         </p>
         <div class="relative w-full">
-          <br />
-          <span class="font-bold text-2xl">IP:</span> {{ userIP }}
-          <br />
-          <span class="font-bold text-2xl">GEO:</span> {{ userLong }},
-          {{ userLat }}
-          <br />
-          <span class="font-bold text-2xl">Location:</span> {{ userState }},
-          {{ userCity }}
-          <br />
+          <span class="text-lg italic "
+            >IP, Geolocation, City, ISP, Browser, Time-zone, Hair color, Weight,
+            Height, Zip-code, Favorite dish, Sex and much much more.
+          </span>
           <br />
         </div>
         <br />
@@ -159,17 +154,23 @@
         </button>
       </div>
       <Geo></Geo>
-      <ModalAbout v-if="modalAboutOn" @close="closeModal()">123</ModalAbout>
+      <ModalAbout v-if="modalAboutOn" @close="closeModal()"></ModalAbout>
     </div>
   </div>
+  <ModalCookie
+    class="realative h-auto top-2/3"
+    v-if="modalCookieOn"
+    @close="closeCookie()"
+  ></ModalCookie>
 </template>
 
 <script>
 import Tooltip from "./components/Tooltip.vue";
-// import axios from "axios";
 import DatePicker from "./components/DatePicker.vue";
 import LeakForm from "./components/LeakForm.vue";
 import ModalAbout from "./components/ModalAbout.vue";
+import ModalCookie from "./components/ModalCookie.vue";
+
 import Geo from "./components/Geo.vue";
 
 export default {
@@ -180,6 +181,7 @@ export default {
     LeakForm,
     ModalAbout,
     Geo,
+    ModalCookie,
   },
   data() {
     return {
@@ -199,18 +201,10 @@ export default {
       formsFilled: 0,
       showNext: false,
       modalAboutOn: false,
+      modalCookieOn: true,
     };
   },
-  mounted() {
-    // axios.get("https://geolocation-db.com/json/").then((response) => {
-    //   console.log(response.data);
-    //   this.userIP = response.data.IPv4;
-    //   this.userCity = response.data.city;
-    //   this.userLat = response.data.latitude;
-    //   this.userLong = response.data.longitude;
-    //   this.userState = response.data.state;
-    // });
-  },
+  mounted() {},
   methods: {
     nextBlock() {
       this.loading = true;
@@ -229,7 +223,9 @@ export default {
     },
     closeModal() {
       this.modalAboutOn = false;
-      console.log("close this shit");
+    },
+    closeCookie() {
+      this.modalCookieOn = false;
     },
   },
 };
