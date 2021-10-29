@@ -5,10 +5,12 @@
     v-show="formsFilled === qi"
     class=""
   >
-    <div class="relative h-auto bg-yellow-700 rounded-sm w-92 py-1 mt-6">
+    <div
+      class="relative h-auto bg-yellow-700 rounded-sm w-92 py-1 mt-6 md:w-3/5 md:mx-auto"
+    >
       <i
         v-if="loading"
-        class="absolute left-1/3 top-1/3
+        class="absolute left-1/3 top-1/3 md:top-52 md:left-40
                 fab fa-bitcoin fa-6x h-auto  w-auto animate-spin-slow doNotChangeOpacity"
       ></i>
       <div

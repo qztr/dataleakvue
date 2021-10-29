@@ -7,7 +7,7 @@
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
-        <section class="modal-body" id="modalDescription">
+        <section class="modal-body md:px-8" id="modalDescription">
           <slot name="body">
             This website is a satire on todays data leak reality (l) and cookie
             policy (ll)

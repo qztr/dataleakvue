@@ -7,7 +7,7 @@
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
-        <section class="modal-body" id="modalDescription">
+        <section class="modal-body md:px-8" id="modalDescription">
           <slot name="body text-center">
             This site will collect literally everything that can be collected
             about you.
