@@ -1,3 +1,10 @@
+<!-- 
+
+TODO: 
+2) blockchain div is kinda pissing off by positioning
+3) spining money on loading is never accurate at the center
+
+ -->
 <template>
   <div>
     <div
@@ -66,7 +73,7 @@
           <div class="relative h-auto bg-green-700 rounded-sm w-92 py-1 mt-6">
             <i
               v-if="loading"
-              class="absolute left-1/3 top-1/3 md:top-56 md:left-48
+              class="absolute left-1/3 top-1/3 md:top-56 md:left-56 z-20
                 fas fa-search-dollar fa-6x h-auto  w-auto animate-spin-slow doNotChangeOpacity"
             ></i>
             <div
@@ -77,17 +84,28 @@
                 Would You like to provide us more infromation?
               </p>
               <div class="pt-8 ">
-                What is your name?
+                What is your First name?
                 <input
                   class="text-black rounded-md border-8 border-white
                   border-opacity-100 shadow-lg w-full"
-                  type="tel"
-                  placeholder="First name Second name"
+                  type="text"
+                  placeholder="First name"
+                  v-model="userName2"
+                  :disabled="!one"
+                />
+              </div>
+              <div class="pt-8 ">
+                What is your Second name?
+                <input
+                  class="text-black rounded-md border-8 border-white
+                  border-opacity-100 shadow-lg w-full"
+                  type="text"
+                  placeholder="Second name"
                   v-model="userName"
                   :disabled="!one"
                 />
               </div>
-              <div class="pt-8">
+              <div class="pt-8 pb-6">
                 What is your phone number?
                 <input
                   class="text-black rounded-md border-8 border-white
@@ -98,14 +116,15 @@
                   :disabled="!one"
                 />
               </div>
-              <div class="pt-8 pb-6">
+
+              <!-- <div class="pt-8 pb-6">
                 What is your birth date?
                 <DatePicker
                   :disabled="!one"
                   class="w-full"
                   v-model="userBitrh"
                 ></DatePicker>
-              </div>
+              </div> -->
 
               <button
                 class="w-3/4 h-full py-2  px-1 m-2 bg-red-600 self-center shadow-lg rounded-md"
@@ -169,7 +188,7 @@
 
 <script>
 import Tooltip from "./components/Tooltip.vue";
-import DatePicker from "./components/DatePicker.vue";
+// import DatePicker from "./components/DatePicker.vue";
 import LeakForm from "./components/LeakForm.vue";
 import ModalAbout from "./components/ModalAbout.vue";
 import ModalCookie from "./components/ModalCookie.vue";
@@ -179,7 +198,7 @@ export default {
   name: "App",
   components: {
     Tooltip,
-    DatePicker,
+    // DatePicker,
     LeakForm,
     ModalAbout,
     Geo,
@@ -196,6 +215,7 @@ export default {
       one: true,
 
       userName: "",
+      userName2: "",
       userPhone: "",
       userBitrh: "",
       loading: false,
