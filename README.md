@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# sharedata
-
 ## Project setup
 ```
 yarn install
